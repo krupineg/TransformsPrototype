@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="TransformsPrototype.PointControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TransformsPrototype"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ImageBrush ImageSource="2cuts.JPG" x:Key="FillBrush" >
+        </ImageBrush>
+    </UserControl.Resources>
+    <UserControl.RenderTransform>
+        <TransformGroup>
+            <TranslateTransform x:Name="Transform" X="10" Y="10"></TranslateTransform>
+        </TransformGroup>
+    </UserControl.RenderTransform>
+    <Rectangle VerticalAlignment="Top" Height="100" Fill="{StaticResource FillBrush}" x:Name="Rectangle1" HorizontalAlignment="Left" Width="100">
+       
+        </Rectangle>
+</UserControl>
