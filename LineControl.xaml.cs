@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,51 @@ namespace TransformsPrototype
     /// </summary>
     public partial class LineControl : UserControl
     {
+        public static readonly DependencyProperty StartProperty = DependencyProperty.Register(
+            "Start", typeof (MappingPlainConfigurationPointViewModel), typeof (LineControl), new PropertyMetadata(default(MappingPlainConfigurationPointViewModel)));
+
+        public MappingPlainConfigurationPointViewModel Start
+        {
+            get { return (MappingPlainConfigurationPointViewModel) GetValue(StartProperty); }
+            set
+            {
+                SetValue(StartProperty, value);
+                Start.PropertyChanged += StartOnPropertyChanged;
+            }
+        }
+
+        private void StartOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == "X" || propertyChangedEventArgs.PropertyName == "Y")
+            {
+                LineGeometry.StartPoint = new Point(Start.X, Start.Y);
+            }
+        }
+
+        public static readonly DependencyProperty EndProperty = DependencyProperty.Register(
+            "End", typeof (MappingPlainConfigurationPointViewModel), typeof (LineControl), new PropertyMetadata(default(MappingPlainConfigurationPointViewModel)));
+
+        public MappingPlainConfigurationPointViewModel End
+        {
+            get { return (MappingPlainConfigurationPointViewModel) GetValue(EndProperty); }
+            set
+            {
+                SetValue(EndProperty, value);
+                End.PropertyChanged += EndOnPropertyChanged;
+            }
+        }
+
+        private void EndOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == "X" || propertyChangedEventArgs.PropertyName == "Y")
+            {
+                LineGeometry.EndPoint = new Point(End.X, End.Y);
+            }
+        }
+
         public LineControl()
         {
             InitializeComponent();
         }
-
-        
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.Globalization;
+﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace TransformsPrototype
@@ -12,6 +9,10 @@ namespace TransformsPrototype
         bool captured = false;
         double mouseOffsetX, currentMouseX, mouseOffsetY, currentMouseY;
         private MappingPlainConfigurationPointViewModel _selectedPoint;
+        private MappingPlainConfigurationPointViewModel _leftTop;
+        private MappingPlainConfigurationPointViewModel _rightTop;
+        private MappingPlainConfigurationPointViewModel _rightDown;
+        private MappingPlainConfigurationPointViewModel _leftDown;
 
         public MappingPlainFieldViewModel(ILogger logger) : base(logger)
         {
@@ -29,10 +30,29 @@ namespace TransformsPrototype
             LeftDown.Y = 300;
         }
 
-        public MappingPlainConfigurationPointViewModel LeftTop { get; set; }
-        public MappingPlainConfigurationPointViewModel RightTop { get; set; }
-        public MappingPlainConfigurationPointViewModel RightDown { get; set; }
-        public MappingPlainConfigurationPointViewModel LeftDown { get; set; }
+        public MappingPlainConfigurationPointViewModel LeftTop
+        {
+            get { return _leftTop; }
+            set { SetProperty(ref _leftTop, value); }
+        }
+
+        public MappingPlainConfigurationPointViewModel RightTop
+        {
+            get { return _rightTop; }
+            set { SetProperty(ref _rightTop, value); }
+        }
+
+        public MappingPlainConfigurationPointViewModel RightDown
+        {
+            get { return _rightDown; }
+            set { SetProperty(ref _rightDown, value); }
+        }
+
+        public MappingPlainConfigurationPointViewModel LeftDown
+        {
+            get { return _leftDown; }
+            set { SetProperty(ref _leftDown, value); }
+        }
 
         public MappingPlainConfigurationPointViewModel SelectedPoint
         {
@@ -84,6 +104,10 @@ namespace TransformsPrototype
                 Debug.WriteLine("currentMouseY = " + currentMouseY);
                 SelectedPoint.X += mouseOffsetX;
                 SelectedPoint.Y += mouseOffsetY;
+                RaisePropertyChanged("LeftTop");
+                RaisePropertyChanged("RightTop");
+                RaisePropertyChanged("RightDown");
+                RaisePropertyChanged("LeftDown");
             }
            
         }
@@ -103,26 +127,6 @@ namespace TransformsPrototype
         private void MouseUpExecute(object obj)
         {
             captured = false;
-        }
-    }
-
-    public class TranslateOffsetConverter : IMultiValueConverter
-    {
-       
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (values[0] == DependencyProperty.UnsetValue)
-            {
-                return 0;
-            }
-            var x = (double)values[0];
-            var size = (double)values[1];
-            return x - size / 2;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }

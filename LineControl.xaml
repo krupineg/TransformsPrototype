@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:TransformsPrototype"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Path Stroke="Red" StrokeThickness="2">
+    <Path Stroke="Red" StrokeThickness="1">
         <Path.Data>
-            <LineGeometry StartPoint="100,100" EndPoint="200,200" />
+            <LineGeometry x:Name="LineGeometry">
+            </LineGeometry>
         </Path.Data>
     </Path>
 </UserControl>
