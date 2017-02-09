@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -28,22 +29,67 @@ namespace TransformsPrototype
 
         }
 
+        bool captured = false;
+        double mouseOffsetX, currentMouseX, mouseOffsetY, currentMouseY;
+        UIElement source = null;
+
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
             Point position = Mouse.GetPosition(Rectangle2);
-            VisualTreeHelper.HitTest(Rectangle2, null, new HitTestResultCallback(HitTestResultHandler),
-                    new PointHitTestParameters(position)
-            );
+            var result = VisualTreeHelper.HitTest(Rectangle2, position);
+            if (result != null)
+            {
+                PointHitTestResult hitResult = (PointHitTestResult)result;
+                source = (UIElement)Rectangle2;
+                Mouse.Capture(source);
+                captured = true;
+                currentMouseX = e.GetPosition(this).X;
+                currentMouseY = e.GetPosition(this).Y;
+                //currentMouseX = hitResult.PointHit.X;
+                //currentMouseY = hitResult.PointHit.Y;
+                Debug.WriteLine("");
+                Debug.WriteLine("Inside Mouse down");
+                Debug.WriteLine("currentMouseX = " + currentMouseX);
+                Debug.WriteLine("currentMouseY = " + currentMouseY);
+            }
         }
 
-        private HitTestResultBehavior HitTestResultHandler(HitTestResult result)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            PointHitTestResult hitResult = (PointHitTestResult)result;
-            Console.WriteLine(((FrameworkElement)hitResult.VisualHit).Name);
-            Console.WriteLine(hitResult.PointHit.ToString());
-            return HitTestResultBehavior.Continue;
+            base.OnMouseMove(e);
+            if (captured)
+            {
+                double newMouseX = e.GetPosition(this).X;
+                double newMouseY = e.GetPosition(this).Y;
+
+                Debug.WriteLine("");
+                Debug.WriteLine("currentMouseX = " + currentMouseX);
+                Debug.WriteLine("currentMouseY = " + currentMouseY);
+                Debug.WriteLine("newMosueX = " + newMouseX);
+                Debug.WriteLine("newMosueY = " + newMouseY);
+
+                mouseOffsetX = newMouseX - currentMouseX;
+                mouseOffsetY = newMouseY - currentMouseY;
+                currentMouseX = newMouseX;
+                currentMouseY = newMouseY;
+
+                Debug.WriteLine("After transform");
+                Debug.WriteLine("currentMouseX = " + currentMouseX);
+                Debug.WriteLine("currentMouseY = " + currentMouseY);
+                var transform = Rectangle2.RenderTransform as TranslateTransform;
+                transform.X += mouseOffsetX;
+                transform.Y += mouseOffsetY;
+            }
         }
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonUp(e);
+            Mouse.Capture(null);
+            captured = false;
+        }
+
+
 
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {

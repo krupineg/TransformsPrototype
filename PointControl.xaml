@@ -11,9 +11,7 @@
         </ImageBrush>
     </UserControl.Resources>
     <UserControl.RenderTransform>
-        <TransformGroup>
-            <TranslateTransform x:Name="Transform" X="10" Y="10"></TranslateTransform>
-        </TransformGroup>
+            <TranslateTransform x:Name="Transform" X="50" Y="50"></TranslateTransform>
     </UserControl.RenderTransform>
     <Rectangle VerticalAlignment="Top" Height="100" Fill="{StaticResource FillBrush}" x:Name="Rectangle1" HorizontalAlignment="Left" Width="100">
        
