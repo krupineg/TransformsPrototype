@@ -4,16 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TransformsPrototype"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" x:Name="UserControl"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <ImageBrush ImageSource="2cuts.JPG" x:Key="FillBrush" >
-        </ImageBrush>
+        <ImageBrush ImageSource="2cuts.JPG" x:Key="FillBrush" />
+        <local:TranslateOffsetConverter x:Key="OffsetConverter"/>
     </UserControl.Resources>
     <UserControl.RenderTransform>
-            <TranslateTransform x:Name="Transform" X="50" Y="50"></TranslateTransform>
+        <TranslateTransform>
+            <TranslateTransform.X>
+                <MultiBinding Converter="{StaticResource OffsetConverter}" >
+                    <Binding  UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" Path="X"></Binding>
+                    <Binding Mode="OneWay" Path="ActualWidth" ElementName="UserControl"></Binding>
+                </MultiBinding>
+            </TranslateTransform.X>
+            <TranslateTransform.Y>
+                <MultiBinding Converter="{StaticResource OffsetConverter}" >
+                    <Binding  UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" Path="Y"></Binding>
+                    <Binding  Mode="OneWay" Path="ActualHeight" ElementName="UserControl"></Binding>
+                </MultiBinding>
+            </TranslateTransform.Y>
+
+        </TranslateTransform>
     </UserControl.RenderTransform>
-    <Rectangle VerticalAlignment="Top" Height="100" Fill="{StaticResource FillBrush}" x:Name="Rectangle1" HorizontalAlignment="Left" Width="100">
-       
-        </Rectangle>
+    <Rectangle Fill="{StaticResource FillBrush}" 
+               VerticalAlignment="Top" 
+               HorizontalAlignment="Left" 
+               Height="100"  
+               Width="100"/>
+        
 </UserControl>

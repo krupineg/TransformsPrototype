@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,19 +16,15 @@ using System.Windows.Shapes;
 namespace TransformsPrototype
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LineControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LineControl : UserControl
     {
-        public MainWindow()
+        public LineControl()
         {
             InitializeComponent();
-            DataContext = new MappingPlainFieldViewModel(null);
         }
 
-        private class loggr
-        {
-            
-        }
+        
     }
 }
