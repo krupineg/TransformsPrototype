@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,7 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="TranslateOffsetConverter.cs" />
+    <Compile Include="IMappingPlanePointViewModel.cs" />
+    <Compile Include="MappingPlainPointToPointConverter.cs" />
+    <Compile Include="ShapeCenterToOriginConverter.cs" />
     <Page Include="LineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -75,24 +78,24 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MappingPlainField.xaml">
+    <Page Include="MappingPlaneView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PointControl.xaml">
+    <Page Include="MappingPlanePointView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MappingPlainConfigurationPointViewModel.cs" />
-    <Compile Include="MappingPlainField.xaml.cs">
-      <DependentUpon>MappingPlainField.xaml</DependentUpon>
+    <Compile Include="MappingPlanePointViewModel.cs" />
+    <Compile Include="MappingPlaneView.xaml.cs">
+      <DependentUpon>MappingPlaneView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MappingPlainFieldViewModel.cs" />
+    <Compile Include="MappingPlaneViewModel.cs" />
     <Compile Include="ObservableObject.cs" />
-    <Compile Include="PointControl.xaml.cs">
-      <DependentUpon>PointControl.xaml</DependentUpon>
+    <Compile Include="MappingPlanePointView.xaml.cs">
+      <DependentUpon>MappingPlanePointView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

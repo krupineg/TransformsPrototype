@@ -18,9 +18,9 @@ namespace TransformsPrototype
     /// <summary>
     /// Interaction logic for PointControl.xaml
     /// </summary>
-    public partial class PointControl : UserControl
+    public partial class MappingPlanePointView : UserControl
     {
-        public PointControl()
+        public MappingPlanePointView()
         {
             InitializeComponent();
         }

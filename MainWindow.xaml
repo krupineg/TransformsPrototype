@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="800" >
     <Grid  >
-        <local:MappingPlainField x:Name="Field" DataContext="{Binding }" 
+        <local:MappingPlaneView x:Name="Field" DataContext="{Binding }" 
+                                
                                  SelectedItem="{Binding SelectedPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  MouseDownCommand="{Binding MouseDownCommand}"
                                  MouseMoveCommand="{Binding MouseMoveCommand}"

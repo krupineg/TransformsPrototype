@@ -22,11 +22,11 @@ namespace TransformsPrototype
     public partial class LineControl : UserControl
     {
         public static readonly DependencyProperty StartProperty = DependencyProperty.Register(
-            "Start", typeof (MappingPlainConfigurationPointViewModel), typeof (LineControl), new PropertyMetadata(default(MappingPlainConfigurationPointViewModel)));
+            "Start", typeof (MappingPlanePointViewModel), typeof (LineControl), new PropertyMetadata(default(MappingPlanePointViewModel)));
 
-        public MappingPlainConfigurationPointViewModel Start
+        public MappingPlanePointViewModel Start
         {
-            get { return (MappingPlainConfigurationPointViewModel) GetValue(StartProperty); }
+            get { return (MappingPlanePointViewModel) GetValue(StartProperty); }
             set
             {
                 SetValue(StartProperty, value);
@@ -43,11 +43,11 @@ namespace TransformsPrototype
         }
 
         public static readonly DependencyProperty EndProperty = DependencyProperty.Register(
-            "End", typeof (MappingPlainConfigurationPointViewModel), typeof (LineControl), new PropertyMetadata(default(MappingPlainConfigurationPointViewModel)));
+            "End", typeof (MappingPlanePointViewModel), typeof (LineControl), new PropertyMetadata(default(MappingPlanePointViewModel)));
 
-        public MappingPlainConfigurationPointViewModel End
+        public MappingPlanePointViewModel End
         {
-            get { return (MappingPlainConfigurationPointViewModel) GetValue(EndProperty); }
+            get { return (MappingPlanePointViewModel) GetValue(EndProperty); }
             set
             {
                 SetValue(EndProperty, value);
