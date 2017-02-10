@@ -1,37 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TransformsPrototype
 {
     public class ConvexityCalculator : IConvexityCalculator
     {
-        public int Calculate(IEnumerable<IMappingPlanePointViewModel> collection)
+        public bool IsConvex(IEnumerable<IMappingPlanePointViewModel> collection)
         {
-            var p = collection.ToArray();
-            int i, j, k;
-            int flag = 0;
-            double z;
-            var n = p.Length;
-            if (n < 3)
-                return (0);
-
-            for (i = 0; i < n; i++)
+            var items = collection.ToArray();
+            int count = items.Length;
+            int sign = 0;
+            for (int currentIndex = 0; currentIndex < count; currentIndex++)
             {
-                j = (i + 1) % n;
-                k = (i + 2) % n;
-                z = (p[j].X - p[i].X) * (p[k].Y - p[j].Y);
-                z -= (p[j].Y - p[i].Y) * (p[k].X - p[j].X);
-                if (z < 0)
-                    flag |= 1;
-                else if (z > 0)
-                    flag |= 2;
-                if (flag == 3)
-                    return 1;
+                var nextIndex = (currentIndex + 1) % count;
+                var afterNextIndex = (currentIndex + 2) % count;
+
+                var crossProduct = (items[nextIndex].X - items[currentIndex].X) * (items[afterNextIndex].Y - items[nextIndex].Y);
+                crossProduct -= (items[nextIndex].Y - items[currentIndex].Y) * (items[afterNextIndex].X - items[nextIndex].X);
+
+                if (sign != 0 && sign != Math.Sign(crossProduct))
+                {
+                    return false;
+                }
+
+                sign = Math.Sign(crossProduct);
             }
-            if (flag != 0)
-                return -1;
-            else
-                return (0);
+            return true;
         }
+        
     }
 }

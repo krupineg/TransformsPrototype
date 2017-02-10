@@ -5,15 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TransformsPrototype"  
              mc:Ignorable="d"
-             
              d:DesignHeight="300" d:DesignWidth="300" >
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" ></BooleanToVisibilityConverter>
         <local:MappingPlainPointToPointConverter x:Key="PointConverter"/>
         <DataTemplate DataType="{x:Type local:MappingPlanePointViewModel}">
             <local:MappingPlanePointView DataContext="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Top"  Focusable="True" Width="100" Height="100"/>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
+        <Rectangle Width="10" Height="10" Fill="Red" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Rectangle Width="10" Height="10" Fill="White" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="{Binding IsValid, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <ItemsControl ItemsSource="{Binding ItemsCollection, UpdateSourceTrigger=PropertyChanged}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

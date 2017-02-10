@@ -4,6 +4,6 @@ namespace TransformsPrototype
 {
     public interface IConvexityCalculator
     {
-        int Calculate(IEnumerable<IMappingPlanePointViewModel> collection);
+        bool IsConvex(IEnumerable<IMappingPlanePointViewModel> collection);
     }
 }

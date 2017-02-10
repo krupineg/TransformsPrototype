@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,6 +18,8 @@ namespace TransformsPrototype
         //private readonly IMappingPlanePointViewModel _leftBottom;
         private IMappingPlanePointViewModel[] _itemsCollection;
         private IConvexityCalculator _convexityCalculator;
+        private bool _isValid;
+
         public MappingPlaneViewModel(ILogger logger, IConvexityCalculator convexityCalculator, IMappingPlanePointViewModel leftTop, IMappingPlanePointViewModel rightTop, IMappingPlanePointViewModel rightBottom, IMappingPlanePointViewModel leftBottom) : base(logger)
         {
             _convexityCalculator = convexityCalculator;
@@ -31,6 +34,7 @@ namespace TransformsPrototype
             rightTop.Next = rightBottom;
             rightBottom.Next = leftBottom;
             leftBottom.Next = leftTop;
+            IsValid = _convexityCalculator.IsConvex(_itemsCollection);
         }
 
         public IMappingPlanePointViewModel SelectedPoint
@@ -74,18 +78,11 @@ namespace TransformsPrototype
             }
 
         }
-        public ICommand LockCommand
+
+        public bool IsValid
         {
-            get
-            {
-                return new DelegateCommand(() =>
-                {
-                    if (_convexityCalculator.Calculate(_itemsCollection) < 1)
-                    {
-                        MessageBox.Show("error");
-                    }
-                }, () => true);
-            }
+            get { return _isValid; }
+            set { SetProperty(ref _isValid, value); }
         }
 
         private void MouseMoveExecute(object obj)
@@ -110,6 +107,7 @@ namespace TransformsPrototype
                 SelectedPoint.X += _mouseOffsetX;
                 SelectedPoint.Y += _mouseOffsetY;
                 RaisePropertyChanged("ItemsCollection");
+                IsValid = _convexityCalculator.IsConvex(_itemsCollection);
             }
            
         }
