@@ -27,7 +27,7 @@ namespace TransformsPrototype
             var rightTop = new MappingPlanePointViewModel(null, 300, 100);
             var rightBottom = new MappingPlanePointViewModel(null, 300, 300);
             var leftBottom = new MappingPlanePointViewModel(null, 100, 300);
-            DataContext = new MappingPlaneViewModel(null, leftTop, rightTop, rightBottom, leftBottom);
+            DataContext = new MappingPlaneViewModel(null, new ConvexityCalculator(), leftTop, rightTop, rightBottom, leftBottom);
         }
     }
 }
