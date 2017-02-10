@@ -16,9 +16,10 @@ namespace TransformsPrototype
         //private readonly IMappingPlanePointViewModel _rightBottom;
         //private readonly IMappingPlanePointViewModel _leftBottom;
         private IMappingPlanePointViewModel[] _itemsCollection;
-
-        public MappingPlaneViewModel(ILogger logger, IMappingPlanePointViewModel leftTop, IMappingPlanePointViewModel rightTop, IMappingPlanePointViewModel rightBottom, IMappingPlanePointViewModel leftBottom) : base(logger)
+        private IConvexityCalculator _convexityCalculator;
+        public MappingPlaneViewModel(ILogger logger, IConvexityCalculator convexityCalculator, IMappingPlanePointViewModel leftTop, IMappingPlanePointViewModel rightTop, IMappingPlanePointViewModel rightBottom, IMappingPlanePointViewModel leftBottom) : base(logger)
         {
+            _convexityCalculator = convexityCalculator;
             _itemsCollection = new []
             {
                 leftTop,
@@ -72,6 +73,19 @@ namespace TransformsPrototype
                 return _itemsCollection;
             }
 
+        }
+        public ICommand LockCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    if (_convexityCalculator.Calculate(_itemsCollection) < 1)
+                    {
+                        MessageBox.Show("error");
+                    }
+                }, () => true);
+            }
         }
 
         private void MouseMoveExecute(object obj)

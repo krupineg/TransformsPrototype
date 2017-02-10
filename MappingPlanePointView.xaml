@@ -25,11 +25,31 @@
                 </MultiBinding>
             </TranslateTransform.Y>
         </TranslateTransform>
+        
     </UserControl.RenderTransform>
-    <Rectangle Fill="{StaticResource FillBrush}" 
-               VerticalAlignment="Top" 
-               HorizontalAlignment="Left" 
-               Height="100"  
-               Width="100">
-    </Rectangle>
+    <Grid>
+        <Path VerticalAlignment="Top" Fill="AliceBlue" Opacity="0.2"
+               HorizontalAlignment="Left" >
+            <Path.Data>
+                <EllipseGeometry Center="50, 50" RadiusX="50" RadiusY="50"></EllipseGeometry>
+            </Path.Data>
+        </Path>
+        <Path VerticalAlignment="Top" Fill="Transparent" Stroke="Blue"
+               HorizontalAlignment="Left" >
+            <Path.Data>
+                <EllipseGeometry Center="50, 50" RadiusX="50" RadiusY="50"></EllipseGeometry>
+            </Path.Data>
+        </Path>
+        <Path VerticalAlignment="Top" Stroke="Blue"
+               HorizontalAlignment="Left" >
+            <Path.Data>
+                <GeometryGroup>
+                    <LineGeometry StartPoint="50, 30" EndPoint="50, 70"></LineGeometry>
+                    <LineGeometry StartPoint="30, 50" EndPoint="70, 50"></LineGeometry>
+                </GeometryGroup>
+               
+            </Path.Data>
+        </Path>
+    </Grid>
+    
 </UserControl>
