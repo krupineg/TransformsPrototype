@@ -23,12 +23,11 @@ namespace TransformsPrototype
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MappingPlainFieldViewModel(null);
-        }
-
-        private class loggr
-        {
-            
+            var leftTop = new MappingPlanePointViewModel(null, 100, 100);
+            var rightTop = new MappingPlanePointViewModel(null, 300, 100);
+            var rightBottom = new MappingPlanePointViewModel(null, 300, 300);
+            var leftBottom = new MappingPlanePointViewModel(null, 100, 300);
+            DataContext = new MappingPlaneViewModel(null, leftTop, rightTop, rightBottom, leftBottom);
         }
     }
 }

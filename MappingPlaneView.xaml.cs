@@ -13,31 +13,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Point = System.Windows.Point;
 
 namespace TransformsPrototype
 {
     /// <summary>
     /// Interaction logic for MappingPlainField.xaml
     /// </summary>
-    public partial class MappingPlainField : UserControl
+    public partial class MappingPlaneView : UserControl
     {
-        public MappingPlainField()
+        public MappingPlaneView()
         {
             InitializeComponent();
             Loaded += OnLoaded;
         }
 
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
-            "SelectedItem", typeof (object), typeof (MappingPlainField), new PropertyMetadata(default(object)));
+            "SelectedItem", typeof (object), typeof (MappingPlaneView), new PropertyMetadata(default(object)));
 
         public static readonly DependencyProperty MouseDownCommandProperty = DependencyProperty.Register(
-            "MouseDownCommand", typeof (ICommand), typeof (MappingPlainField), new PropertyMetadata(default(ICommand)));
+            "MouseDownCommand", typeof (ICommand), typeof (MappingPlaneView), new PropertyMetadata(default(ICommand)));
 
         public static readonly DependencyProperty MouseMoveCommandProperty = DependencyProperty.Register(
-            "MouseMoveCommand", typeof (ICommand), typeof (MappingPlainField), new PropertyMetadata(default(ICommand)));
+            "MouseMoveCommand", typeof (ICommand), typeof (MappingPlaneView), new PropertyMetadata(default(ICommand)));
 
         public static readonly DependencyProperty MouseUpCommandProperty = DependencyProperty.Register(
-            "MouseUpCommand", typeof (ICommand), typeof (MappingPlainField), new PropertyMetadata(default(ICommand)));
+            "MouseUpCommand", typeof (ICommand), typeof (MappingPlaneView), new PropertyMetadata(default(ICommand)));
 
         public ICommand MouseUpCommand
         {
@@ -86,7 +87,7 @@ namespace TransformsPrototype
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
-            Source = FindVisualParent<PointControl>(e.OriginalSource as DependencyObject);
+            Source = FindVisualParent<MappingPlanePointView>(e.OriginalSource as DependencyObject);
             if (Source != null)
             {
                 SelectedItem = Source.DataContext;
@@ -104,7 +105,6 @@ namespace TransformsPrototype
                 SelectedItem = null;
             }
         }
-        
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
