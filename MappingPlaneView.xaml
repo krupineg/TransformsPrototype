@@ -35,7 +35,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <ContentControl Content="{Binding}" Panel.ZIndex="2"/>
+                        <ContentControl Content="{Binding}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
