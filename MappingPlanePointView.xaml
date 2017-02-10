@@ -7,7 +7,6 @@
              mc:Ignorable="d" x:Name="UserControl"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <ImageBrush ImageSource="2cuts.JPG" x:Key="FillBrush" />
         <local:ShapeCenterToOriginConverter x:Key="OffsetConverter"/>
     </UserControl.Resources>
     <UserControl.RenderTransform>
@@ -28,14 +27,14 @@
         
     </UserControl.RenderTransform>
     <Grid>
-        <Path VerticalAlignment="Top" Fill="AliceBlue" Opacity="0.2"
+        <Path VerticalAlignment="Top" Fill="AliceBlue" Opacity="0.5"
                HorizontalAlignment="Left" >
             <Path.Data>
                 <EllipseGeometry Center="50, 50" RadiusX="50" RadiusY="50"></EllipseGeometry>
             </Path.Data>
         </Path>
-        <Ellipse Width="100" Height="100" VerticalAlignment="Top" Stroke="Blue" StrokeThickness="0.5" HorizontalAlignment="Left"></Ellipse>
-        <Path VerticalAlignment="Top" Stroke="Blue"
+        <Ellipse Width="100" Height="100" Stroke="DarkBlue" Opacity="0.5" StrokeThickness="1"></Ellipse>
+        <Path VerticalAlignment="Top" Stroke="DarkBlue" Opacity="0.5"
                HorizontalAlignment="Left" >
             <Path.Data>
                 <GeometryGroup>

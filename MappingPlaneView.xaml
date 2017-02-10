@@ -22,7 +22,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:MappingPlanePointViewModel}">
-                    <Line Stroke="Red" StrokeThickness="1" X1="{Binding X, UpdateSourceTrigger=PropertyChanged}" Y1="{Binding Y, UpdateSourceTrigger=PropertyChanged}" X2="{Binding Next.X, UpdateSourceTrigger=PropertyChanged}" Y2="{Binding Next.Y, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Line Stroke="Red" Opacity="0.5" StrokeThickness="1" X1="{Binding X, UpdateSourceTrigger=PropertyChanged}" Y1="{Binding Y, UpdateSourceTrigger=PropertyChanged}" X2="{Binding Next.X, UpdateSourceTrigger=PropertyChanged}" Y2="{Binding Next.Y, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
