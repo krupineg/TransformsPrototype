@@ -24,8 +24,7 @@
                     <Binding  Mode="OneWay" Path="ActualHeight" ElementName="UserControl"></Binding>
                 </MultiBinding>
             </TranslateTransform.Y>
-            </SkewTransform>
-        </TransformGroup>
+        </TranslateTransform>
         
     </UserControl.RenderTransform>
     <Grid>
