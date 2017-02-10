@@ -17,17 +17,26 @@ namespace TransformsPrototype
         public MappingPlainFieldViewModel(ILogger logger) : base(logger)
         {
             LeftTop = new MappingPlainConfigurationPointViewModel(logger);
+            LeftDown = new MappingPlainConfigurationPointViewModel(logger);
+            RightDown = new MappingPlainConfigurationPointViewModel(logger);
+            RightTop = new MappingPlainConfigurationPointViewModel(logger);
+            LeftTop.Next = RightTop;
+            LeftTop.Previous = LeftDown;
+            RightTop.Next = RightDown;
+            RightTop.Previous = LeftTop;
+            RightDown.Next = LeftDown;
+            RightDown.Previous = RightTop;
+            LeftDown.Next = LeftTop;
+            LeftDown.Previous = RightDown;
             LeftTop.X = 100;
             LeftTop.Y = 100;
-            RightTop = new MappingPlainConfigurationPointViewModel(logger);
             RightTop.X = 300;
             RightTop.Y = 100;
-            RightDown = new MappingPlainConfigurationPointViewModel(logger);
             RightDown.X = 300;
             RightDown.Y = 300;
-            LeftDown = new MappingPlainConfigurationPointViewModel(logger);
             LeftDown.X = 100;
             LeftDown.Y = 300;
+            
         }
 
         public MappingPlainConfigurationPointViewModel LeftTop
@@ -83,6 +92,21 @@ namespace TransformsPrototype
                 return new DelegateCommand(MouseUpExecute, o => captured);
             }
         }
+
+        public ICommand LockCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    if (Convex(new[] { LeftTop, RightTop, RightDown, LeftDown }) > 0)
+                    {
+                        MessageBox.Show("error");
+                    }
+                }, ()=>true);
+            }
+        }
+
         private void MouseMoveExecute(object obj)
         {
             if (captured)
@@ -111,7 +135,33 @@ namespace TransformsPrototype
             }
            
         }
+        int Convex(MappingPlainConfigurationPointViewModel[] p)
+        {
+            int i, j, k;
+            int flag = 0;
+            double z;
+            var n = p.Length;
+            if (n < 3)
+                return (0);
 
+            for (i = 0; i < n; i++)
+            {
+                j = (i + 1) % n;
+                k = (i + 2) % n;
+                z = (p[j].X - p[i].X) * (p[k].Y - p[j].Y);
+                z -= (p[j].Y - p[i].Y) * (p[k].X - p[j].X);
+                if (z < 0)
+                    flag |= 1;
+                else if (z > 0)
+                    flag |= 2;
+                if (flag == 3)
+                    return 1;
+            }
+            if (flag != 0)
+                return -1;
+            else
+                return (0);
+        }
 
         private void MouseDownExecute(object obj)
         {
