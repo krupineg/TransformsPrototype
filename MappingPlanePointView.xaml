@@ -34,12 +34,7 @@
                 <EllipseGeometry Center="50, 50" RadiusX="50" RadiusY="50"></EllipseGeometry>
             </Path.Data>
         </Path>
-        <Path VerticalAlignment="Top" Fill="Transparent" Stroke="Blue"
-               HorizontalAlignment="Left" >
-            <Path.Data>
-                <EllipseGeometry Center="50, 50" RadiusX="50" RadiusY="50"></EllipseGeometry>
-            </Path.Data>
-        </Path>
+        <Ellipse Width="100" Height="100" VerticalAlignment="Top" Stroke="Blue" StrokeThickness="0.5" HorizontalAlignment="Left"></Ellipse>
         <Path VerticalAlignment="Top" Stroke="Blue"
                HorizontalAlignment="Left" >
             <Path.Data>
