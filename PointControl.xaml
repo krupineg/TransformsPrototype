@@ -11,26 +11,50 @@
         <local:TranslateOffsetConverter x:Key="OffsetConverter"/>
     </UserControl.Resources>
     <UserControl.RenderTransform>
-        <TranslateTransform>
-            <TranslateTransform.X>
-                <MultiBinding Converter="{StaticResource OffsetConverter}" >
-                    <Binding  UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" Path="X"></Binding>
-                    <Binding Mode="OneWay" Path="ActualWidth" ElementName="UserControl"></Binding>
-                </MultiBinding>
-            </TranslateTransform.X>
-            <TranslateTransform.Y>
-                <MultiBinding Converter="{StaticResource OffsetConverter}" >
-                    <Binding  UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" Path="Y"></Binding>
-                    <Binding  Mode="OneWay" Path="ActualHeight" ElementName="UserControl"></Binding>
-                </MultiBinding>
-            </TranslateTransform.Y>
+        <TransformGroup>
+            <TranslateTransform>
+                <TranslateTransform.X>
+                    <MultiBinding Converter="{StaticResource OffsetConverter}" >
+                        <Binding  UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" Path="X"></Binding>
+                        <Binding Mode="OneWay" Path="ActualWidth" ElementName="UserControl"></Binding>
+                    </MultiBinding>
+                </TranslateTransform.X>
+                <TranslateTransform.Y>
+                    <MultiBinding Converter="{StaticResource OffsetConverter}" >
+                        <Binding  UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" Path="Y"></Binding>
+                        <Binding  Mode="OneWay" Path="ActualHeight" ElementName="UserControl"></Binding>
+                    </MultiBinding>
+                </TranslateTransform.Y>
+            </TranslateTransform>
+            <SkewTransform CenterX="{Binding X}" CenterY="{Binding Y}" AngleX="{Binding AngleX}" AngleY="{Binding AngleY}">
 
-        </TranslateTransform>
-    </UserControl.RenderTransform>
-    <Rectangle Fill="{StaticResource FillBrush}" 
-               VerticalAlignment="Top" 
-               HorizontalAlignment="Left" 
-               Height="100"  
-               Width="100"/>
+            </SkewTransform>
+        </TransformGroup>
         
+    </UserControl.RenderTransform>
+    <Grid>
+        <Path VerticalAlignment="Top" Fill="AliceBlue" Opacity="0.2"
+               HorizontalAlignment="Left" >
+            <Path.Data>
+                <EllipseGeometry Center="50, 50" RadiusX="50" RadiusY="50"></EllipseGeometry>
+            </Path.Data>
+        </Path>
+        <Path VerticalAlignment="Top" Fill="Transparent" Stroke="Blue"
+               HorizontalAlignment="Left" >
+            <Path.Data>
+                <EllipseGeometry Center="50, 50" RadiusX="50" RadiusY="50"></EllipseGeometry>
+            </Path.Data>
+        </Path>
+        <Path VerticalAlignment="Top" Stroke="Blue"
+               HorizontalAlignment="Left" >
+            <Path.Data>
+                <GeometryGroup>
+                    <LineGeometry StartPoint="50, 30" EndPoint="50, 70"></LineGeometry>
+                    <LineGeometry StartPoint="30, 50" EndPoint="70, 50"></LineGeometry>
+                </GeometryGroup>
+               
+            </Path.Data>
+        </Path>
+    </Grid>
+    
 </UserControl>
