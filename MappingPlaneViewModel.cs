@@ -15,12 +15,12 @@ namespace TransformsPrototype
         //private readonly IMappingPlanePointViewModel _rightTop;
         //private readonly IMappingPlanePointViewModel _rightBottom;
         //private readonly IMappingPlanePointViewModel _leftBottom;
-        private ObservableCollection<IMappingPlanePointViewModel> _itemsCollection;
+        private IMappingPlanePointViewModel[] _itemsCollection;
         private IConvexityCalculator _convexityCalculator;
         public MappingPlaneViewModel(ILogger logger, IConvexityCalculator convexityCalculator, IMappingPlanePointViewModel leftTop, IMappingPlanePointViewModel rightTop, IMappingPlanePointViewModel rightBottom, IMappingPlanePointViewModel leftBottom) : base(logger)
         {
             _convexityCalculator = convexityCalculator;
-            _itemsCollection = new ObservableCollection<IMappingPlanePointViewModel>
+            _itemsCollection = new []
             {
                 leftTop,
                 rightTop,
@@ -66,7 +66,7 @@ namespace TransformsPrototype
             }
         }
 
-        public ObservableCollection<IMappingPlanePointViewModel> ItemsCollection
+        public IReadOnlyCollection<IMappingPlanePointViewModel> ItemsCollection
         {
             get
             {
