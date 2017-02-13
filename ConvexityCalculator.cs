@@ -9,6 +9,10 @@ namespace TransformsPrototype
         public bool IsConvex(IEnumerable<IMappingPlanePointViewModel> collection)
         {
             var items = collection.ToArray();
+            if (items.Length < 3)
+            {
+                throw new ArgumentException("Polugon should have at least 3 vertices.");
+            }
             int count = items.Length;
             int sign = 0;
             for (int currentIndex = 0; currentIndex < count; currentIndex++)
